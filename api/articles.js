@@ -86,7 +86,7 @@ module.exports = app =>{
             .select('a.id','a.name', 'a.description','a.imageUrl', {autor: 'u.name'})
             .limit(limit).offset(page * limit - limit)
             .whereRaw('??==??', ['u.id','a.userId'])
-            .wherein('categoryId', ids)
+            .whereIn('categoryId', ids)
             .orderBy('a.id', 'desc')
             .then(articles => res.json(articles))
             .catch(err => res.status(500).send(err))
